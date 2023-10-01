@@ -1,0 +1,9 @@
+{
+  "name": "Project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "firebase-tools": "^12.6.1"
+  }
+}
