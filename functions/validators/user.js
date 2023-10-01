@@ -36,6 +36,7 @@ const userSchema = {
     },
     "walletAddress": {
       "type": "string",
+      "pattern": "^[a-fA-F0-9]{42}$"
     },
     "ownedNfts": {
       "type": "array",
@@ -68,7 +69,6 @@ const createUser = (req) => {
 const validate =(userData) => {
   logger.log("going to compile");
   const validator = ajv.compile(userSchema);
-  logger.log(validator);
   logger.log("going to validate");
 
   if (validator(userData)) {
