@@ -61,7 +61,7 @@ class User {
         }
 
 
-class nftListings = {
+class nftListings {
     constructor(id, title, description, category, price, ownerId, creationDate, blockchainRecord, image = {}) {
         this.id = id;
         this.title = title;
@@ -143,5 +143,5 @@ class Transaction {
             required: ['buyerId', 'sellerId', 'nftId', 'transactionDate', 'transactionAmount', 'blockchainConfirmation']
         }
 
-const validate= ActiveXObject.compile(userSchema,transactionSchema)
+const validate= ajv.compile(userSchema,transactionSchema)
 
