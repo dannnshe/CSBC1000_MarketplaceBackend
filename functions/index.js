@@ -40,8 +40,12 @@ module.exports = { webAPI };
 
 const investorRoutes = require("./routes/investors");
 const userRoutes = require("./routes/users");
+const nftRoutes = require("./routes/nftListings");
+const transactionRoutes = require("./routes/Transaction");
 app.use("/", investorRoutes);
 app.use("/", userRoutes);
+app.use("/", nftRoutes);
+app.use("/", transactionRoutes);
 
 
 
