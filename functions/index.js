@@ -49,7 +49,8 @@ class User {
             type: 'string'
           },
           walletAddress:{
-            type:'string'
+            type:'string',
+            pattern: '^[a-fA-F0-9]{42}$'
           },
           ownedNft:{
             type: 'object'
