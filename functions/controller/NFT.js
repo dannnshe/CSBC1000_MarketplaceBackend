@@ -1,16 +1,20 @@
 const { v4: uuidv4 } = require("uuid");
-const { create, retrieve, update, remove } = require("../model/investor");
+const { createNftListings, removeNftListings, updateNftListings, retrieveNftListings } = require("../model/nftListings");
+const {createNftListing } = require("../validators/nftListings");
+const logger = require("firebase-functions/logger");
 
-// add investor
-const addInvestor = async (req, res) => {
+const addnftListings = async (req, res) => {
   try {
-    let investor = req.body;
-    investor["id"] = uuidv4();
+    let nft = req.body;
+    nft["id"] = uuidv4();
 
-    await create(investor);
+
+    const nftModel = createNftListing(nft);
+    logger.log(nftModel);
+    await createNftListings(nftModel);
 
     res.status(201).json({
-      id: investor.id,
+      id: nftModel.id,
       message: "successfully added investor",
     });
   } catch (error) {
@@ -22,13 +26,13 @@ const addInvestor = async (req, res) => {
 
 // get investor by id
 
-const getInvestor = async (req, res) => {
+const retrievenftListings = async (req, res) => {
   try {
-    let investorId = req.params.id;
+    const nftId = req.params.id;
 
-    const investor = await retrieve(investorId);
+    const nft = await retrieveNftListings(nftId);
 
-    res.status(201).json(investor);
+    res.status(200).json(nft);
   } catch (error) {
     res.status(400).json({
       error: error,
@@ -38,13 +42,13 @@ const getInvestor = async (req, res) => {
 
 // modify investor by id
 
-const modifyInvestor = async (req, res) => {
+const modifynftListings = async (req, res) => {
   try {
-    let investorId = req.params.id;
-    let investor = req.body;
-    await update(investorId, investor);
-    const investorResult = await retrieve(investorId);
-    res.status(201).json(investorResult);
+    let nftId = req.params.id;
+    let nft = req.body;
+    await modifynftListings(nftId, nft);
+    const nftUpdated = await retrieveNftListings(nftId);
+    res.status(200).json(nftUpdated);
   } catch (error) {
     res.status(400).json({
       error: error,
@@ -54,11 +58,11 @@ const modifyInvestor = async (req, res) => {
 
 // delete investor by id
 
-const removeInvestor = async (req, res) => {
+const removenftListings = async (req, res) => {
   try {
-    let investorId = req.params.id;
-    await remove(investorId);
-    res.status(201).json({ investorId });
+    let nftId = req.params.id;
+    await removeNftListings(nftId);
+    res.status(200).json({ nftId });
   } catch (error) {
     res.status(400).json({
       error: error,
@@ -66,4 +70,4 @@ const removeInvestor = async (req, res) => {
   }
 };
 
-module.exports = { addInvestor, getInvestor, modifyInvestor, removeInvestor };
+module.exports = { addnftListings, retrievenftListings, modifynftListings, removenftListings };
