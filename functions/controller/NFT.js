@@ -15,7 +15,7 @@ const addnftListings = async (req, res) => {
 
     res.status(201).json({
       id: nftModel.id,
-      message: "successfully added investor",
+      message: "successfully added NFT",
     });
   } catch (error) {
     res.status(400).json({

@@ -1,24 +1,24 @@
 const {v4: uuidv4} = require("uuid");
-const {create, retrieve} = require("../model/user");
+const {createTransaction, retrieveTransaction } = require("../model/Transaction");
 
-const {createUser} = require("../validators/user");
+const {createTransactionValidate} = require("../validators/Transaction");
 
 const logger = require("firebase-functions/logger");
 // add investor
-const addUser = async (req, res) => {
+const createTransactionController = async (req, res) => {
   try {
     logger.log("inside controller");
-    const user = req.body;
-    user["id"] = uuidv4();
+    const transaction = req.body;
+    transaction["transactionId"] = uuidv4();
 
 
-    const userModel = createUser(user);
-    logger.log(userModel);
-    await create(userModel);
+    const transactionModel = createTransactionValidate(transaction);
+    logger.log(transactionModel);
+    await createTransaction(transactionModel);
 
     res.status(201).json({
-      id: user.id,
-      message: "successfully added user",
+      id: transaction.transactionId,
+      message: "successfully added new Transaction",
     });
   } catch (error) {
     logger.log(error);
@@ -30,13 +30,14 @@ const addUser = async (req, res) => {
 
 // get investor by id
 
-const getUser = async (req, res) => {
+const getTransaction = async (req, res) => {
   try {
-    const userId = req.params.id;
+    logger.log("entering get transactions api");
+    const transactionId = req.params.id;
 
-    const user = await retrieve(userId);
+    const transaction = await retrieveTransaction(transactionId);
 
-    res.status(200).json(user);
+    res.status(200).json(transaction);
   } catch (error) {
     res.status(400).json({
       error: error,
@@ -45,4 +46,4 @@ const getUser = async (req, res) => {
 };
 
 
-module.exports = {addUser, getUser};
+module.exports = {createTransactionController, getTransaction};

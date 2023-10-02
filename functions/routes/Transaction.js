@@ -1,19 +1,15 @@
 const { Router } = require("express");
 
-const { addUser, getUser } = require("../controller/users");
+const { createTransactionController, getTransaction } = require("../controller/Transaction");
 
 const router = Router();
 
-// insert investor record
-router.post("/user", addUser);
+router.post("/transactions", createTransactionController);
 
-// retrieving investor record
-router.get("/user/:id", getUser);
+router.get("/transactions/:id", getTransaction);
 
-// modifying investor record
 // router.put("/investor/:id", modifyInvestor);
 
-// deleting investor record
 // router.delete("/investor/:id", removeInvestor);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const {v4: uuidv4} = require("uuid");
-const {create, retrieve} = require("../model/user");
+const {create, retrieve, update} = require("../model/user");
 
 const {createUser} = require("../validators/user");
 
@@ -45,4 +45,19 @@ const getUser = async (req, res) => {
 };
 
 
-module.exports = {addUser, getUser};
+const modifyUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = req.body;
+    await update(userId, user);
+    const userResult = await retrieve(userId);
+    res.status(200).json(userResult);
+  } catch (error) {
+    res.status(400).json({
+      error: error,
+    });
+  }
+};
+
+
+module.exports = {addUser, getUser, modifyUser};

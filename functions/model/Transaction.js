@@ -1,36 +1,36 @@
 const {getDB} = require("../config/firebase");
 
 const db = getDB();
-const userCollection = "users";
+const transactionsCollection = "transactions";
 
 // create
 
-const create = async (user) => {
+const createTransaction = async (user) => {
   await db
-      .collection(userCollection)
+      .collection(transactionsCollection)
       .doc(user.id)
       .set(Object.assign({}, user));
 };
 
 // retrieve
 
-const retrieve = async (id) => {
-  return await (await db.collection(userCollection).doc(id).get()).data();
+const retrieveTransaction = async (id) => {
+  return await (await db.collection(transactionsCollection).doc(id).get()).data();
 };
 
 // update
 
-const update = async (id, user) => {
+const updateTransaction = async (id, user) => {
   await db
-      .collection(userCollection)
+      .collection(transactionsCollection)
       .doc(id)
       .set(user, {merge: true});
 };
 
 // delete
 
-const remove = async (id) => {
-  await db.collection(userCollection).doc(id).delete();
+const removeTransaction = async (id) => {
+  await db.collection(transactionsCollection).doc(id).delete();
 };
 
-module.exports = {create, retrieve, update, remove};
+module.exports = {createTransaction, retrieveTransaction, updateTransaction, removeTransaction};
