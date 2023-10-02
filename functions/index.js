@@ -8,7 +8,6 @@
  */
 
 const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
 const express = require("express");
 const bodyParser = require("body-parser");
 const { initApp, getAPI } = require("./config/firebase");
@@ -46,94 +45,4 @@ app.use("/", investorRoutes);
 app.use("/", userRoutes);
 app.use("/", nftRoutes);
 app.use("/", transactionRoutes);
-
-
-
-
-//
-//
-// class nftListings {
-//     constructor(id, title, description, category, price, ownerId, creationDate, blockchainRecord, image = {}) {
-//         this.id = id;
-//         this.title = title;
-//         this.description = description;
-//         this.category = category;
-//         this.price = price;
-//         this.ownerId = ownerId;
-//         this.creationDate= creationDate;
-//         this.blockchainRecord= blockchainRecord;
-//         this.image= image
-//         }
-// }
-//
-//     const nftListingSchema ={
-//         type: 'object',
-//         properties: {
-//           title: {
-//             type: 'string'
-//           },
-//           description: {
-//             type: 'string'
-//           },
-//           category: {
-//             type: 'string'
-//           },
-//           price: {
-//             type: 'number'
-//           },
-//           ownerId:{
-//             type:'string'   //uuid
-//           },
-//           creationDate:{
-//             type: 'number'
-//           },
-//           blockchainRecord:{
-//             type:"string"
-//           },
-//           image:{
-//             type:"string"    //url
-//           },
-//         }
-//           required: ['title', 'description', 'category', 'price', 'ownerId', 'creationDate', 'blockchainRecord', 'image']
-//
-//     }
-//
-// class Transaction {
-//     constructor(id, buyerId, sellerId, nftId, transactionDate, transactionAmount, blockchainConfirmation = {}) {
-//         this.id = id;
-//         this.buyerId = buyerId;
-//         this.sellerId = sellerId;
-//         this.nftId = nftId;
-//         this.transactionDate = transactionDate;
-//         this.transactionAmount = transactionAmount;
-//         this.blockchainConfirmation = blockchainConfirmation
-//         }
-//
-//         const transactionSchema = {
-//             type: 'object',
-//             properties: {
-//               buyerId: {
-//                 type: 'string'
-//               },
-//               sellerId: {
-//                 type: 'string'
-//               },
-//               nftId: {
-//                 type: 'string'
-//               },
-//               transactionDate: {
-//                 type: 'number'
-//               },
-//               transactionAmount: {
-//                 type: 'number'
-//               },
-//               blockchainConfirmation: {
-//                 type: 'string'
-//               },
-//             },
-//             required: ['buyerId', 'sellerId', 'nftId', 'transactionDate', 'transactionAmount', 'blockchainConfirmation']
-//         }
-//
-
-//
 

@@ -19,9 +19,6 @@ class Transaction {
 const transactionSchema = {
   type: 'object',
   properties: {
-    transactionId: {
-      type: 'string'
-    },
     buyerId: {
       type: 'string'
     },
@@ -44,7 +41,7 @@ const transactionSchema = {
   required: ['buyerId', 'sellerId', 'nftId', 'transactionDate', 'transactionAmount', 'blockchainConfirmation']
 }
 
-const createTransaction = (req) => {
+const createTransactionValidate = (req) => {
   logger.log("create user called");
   const TransactionData = new Transaction(req.transactionId,
       req.buyerId,
@@ -75,5 +72,5 @@ const validate =(TransactionData) => {
   }
 };
 
-module.exports = {createTransaction};
+module.exports = {createTransactionValidate};
 
