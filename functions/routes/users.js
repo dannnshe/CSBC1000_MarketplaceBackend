@@ -1,11 +1,12 @@
-const { Router } = require("express");
+const {Router} = require("express");
 
-const { addUser, getUser, modifyUser } = require("../controller/users");
+const {addUser, getUser, modifyUser} = require("../controller/users");
 
+// eslint-disable-next-line new-cap
 const router = Router();
 
 // insert investor record
-router.get("/viewuser/:id", getUser);
+router.get("/user/:id", getUser);
 
 router.post("/user", addUser);
 

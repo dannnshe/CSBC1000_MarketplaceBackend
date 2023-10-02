@@ -19,9 +19,6 @@ class Transaction {
 const transactionSchema = {
   type: 'object',
   properties: {
-    transactionId: {
-      type: 'string'
-    },
     buyerId: {
       type: 'string'
     },
