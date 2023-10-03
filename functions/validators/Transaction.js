@@ -29,7 +29,7 @@ const transactionSchema = {
       type: 'string'
     },
     transactionDate: {
-      type: 'number'
+      type: 'string'
     },
     transactionAmount: {
       type: 'number'
