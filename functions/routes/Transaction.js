@@ -1,10 +1,12 @@
-const { Router } = require("express");
+const {Router} = require("express");
 
-const { createTransactionController, getTransaction } = require("../controller/Transaction");
+const {createTransactionController, getTransaction} = require("../controller/Transaction");
+
+const {authenticateToken} = require("../auth/authorize");
 
 const router = Router();
 
-router.post("/transactions", createTransactionController);
+router.post("/transactions", authenticateToken, createTransactionController);
 
 router.get("/transactions/:id", getTransaction);
 
