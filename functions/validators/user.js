@@ -1,10 +1,14 @@
 const Ajv = require("ajv");
 const ajv = new Ajv();
+const bcrypt = require("bcrypt");
 
 const logger = require("firebase-functions/logger");
+const saltRounds = 10; // You can adjust this based on your security needs
+
 
 // eslint-disable-next-line require-jsdoc
 class User {
+
   constructor(id, email, password, firstName, lastName, walletAddress, ownedNfts = [], listedNfts = []) {
     this.id = id;
     this.email = email;
@@ -35,8 +39,7 @@ const userSchema = {
       "type": "string",
     },
     "walletAddress": {
-      "type": "string",
-      "pattern": "^[a-fA-F0-9]{42}$"
+      "type": "string"
     },
     "ownedNfts": {
       "type": "array",
@@ -50,9 +53,13 @@ const userSchema = {
 
 const createUser = (req) => {
   logger.log("create user called");
+  const hashedPassword = bcrypt.hashSync(req.password, saltRounds);
+
+  logger.log(hashedPassword);
+
   const userData = new User(req.id,
       req.email,
-      req.password,
+      hashedPassword,
       req.firstName,
       req.lastName,
       req.walletAddress,
@@ -73,8 +80,9 @@ const validate =(userData) => {
 
   if (validator(userData)) {
     logger.log(validator);
+    logger.log('validation is good');
   } else {
-    logger.log(validator.errors);
+    logger.error(validator.errors);
   }
 };
 
